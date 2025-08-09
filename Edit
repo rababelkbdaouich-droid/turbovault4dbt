@@ -1,0 +1,22 @@
+pip install moviepy opencv-pythonfrom moviepy.editor import VideoFileClip, vfx
+
+# === SETTINGS ===
+input_path = "your_video.mp4"    # replace with your video file name
+output_path = "smooth_slowmo.mp4" # output file name
+slowdown_factor = 0.5            # 0.5 = half speed
+target_fps = 60                   # smoother motion
+
+# === PROCESS ===
+print("Loading video...")
+clip = VideoFileClip(input_path)
+
+print("Slowing video...")
+slow_clip = clip.fx(vfx.speedx, slowdown_factor)
+
+print("Increasing FPS...")
+smooth_clip = slow_clip.set_fps(target_fps)
+
+print("Exporting video...")
+smooth_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
+
+print(f"✅ Done! Saved as {output_path}")python smooth_slowmo.py
